@@ -3,15 +3,12 @@ const { json } = require('express');
 const fs = require ('fs')
 
 exports.createSauce = (req, res, next) => {
-    console.log(req.body)
     const sauceObject = JSON.parse(req.body.sauce)
     delete sauceObject._id;
-    console.log(sauceObject)
     const Sauces = new sauces({
         ...sauceObject, 
         imageUrl:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-    console.log('route post ok')
     Sauces.save()
     .then(() => res.status(200).json({message : 'Sauces enregistré !'}))
     .catch(error => res.status(400).json({ error }))
@@ -54,7 +51,6 @@ exports.deleteSauce = (req, res, next) => {
         else{
             const fileName = sauce.imageUrl.split('/images/')[1]
             fs.unlink(`images/${fileName}`, () => {
-               console.log(fileName)
             sauces.deleteOne({_id: req.params.id})
             .then(() => res.status(200).json({message : 'Sauce supprimé !'}))
             .catch(error => res.status(400).json({error}));

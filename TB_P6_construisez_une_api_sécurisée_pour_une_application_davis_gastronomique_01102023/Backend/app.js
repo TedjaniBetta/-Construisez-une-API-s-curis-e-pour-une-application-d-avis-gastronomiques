@@ -20,7 +20,7 @@ const sauces = require('./models/sauces')
 
 mongoose.connect(process.env.DBURL)
     .then(() => {
-        console.log('Ok');
+        console.log('Connexion mongodb : Réussi');
     })
     .catch((error) =>{
     })

@@ -21,7 +21,6 @@ exports.signup = ( req, res, next) => {
 
 // Fonction pour ocnnecter les utilisateur existant
 exports.login = ( req, res, next) => {
-    console.log("login");
     User.findOne({email: req.body.email})
     .then(user => {
         if (!user === null) {
@@ -66,7 +65,6 @@ exports.createUsers = (req, res, next) => {
 
 exports.getAllUsers = (req, res, next) => {
     users.find()
-    console.log("tout est ok ici")
     .then(things => res.status(200).json(users))
     .catch(error => res.status(400).json({ error }));
 }

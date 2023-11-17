@@ -10,9 +10,7 @@ exports.like = (req, res, next) => {
     if (like == 1) {
         sauces.findOne({_id: sauceId})
         .then((sauce) => {
-            console.log(sauce)
             const isLikedByUser = sauce.usersLiked.includes(userId)
-            console.log(isLikedByUser)
             if (!isLikedByUser) {
                 sauces.updateOne({ _id: sauceId }, {
                     $push: { usersLiked: userId },
@@ -32,9 +30,7 @@ exports.like = (req, res, next) => {
     else if (like == -1) {
         sauces.findOne({_id: sauceId})
         .then((sauce) => {
-            console.log(sauce)
             const isDislikedByUser = sauce.usersDisliked.includes(userId)
-            console.log(isDislikedByUser)
             if (!isDislikedByUser) {
                 sauces.updateOne({ _id: sauceId }, {
                     $push: { usersDisliked: userId },
@@ -54,9 +50,7 @@ exports.like = (req, res, next) => {
     else if (like == 0) {
         sauces.findOne({ _id: sauceId })
             .then((sauce) => {
-                console.log(sauce)
                 const isLikedByUser = sauce.usersLiked.includes(userId)
-                console.log(isLikedByUser)
                 if (isLikedByUser) {
                     sauces.updateOne({ _id: sauceId }, {
                         $pull: { usersLiked: userId },
@@ -66,7 +60,6 @@ exports.like = (req, res, next) => {
                         .catch(error => res.status(400).json({ error }))
                 }
                 const isDislikedByUser = sauce.usersDisliked.includes(userId)
-                console.log("isDislikedByUser =>", isDislikedByUser)
                 if (isDislikedByUser) {
                     sauces.updateOne({ _id: sauceId }, {
                         $pull: { usersDisliked: userId },
